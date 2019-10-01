@@ -34,3 +34,9 @@ perl -p -i -e 's/$/ConnectTimeout="5" LoadBalanceWeight="2" MaxConnections="-1">
 perl -p -i -e 's/@([a-zA-Z_])@/ print $1' TE
 perl -p -i -e 's/log4j\.appender\.R\.File.*/log4j.appender.R.File = "$ENV{SCRIPT_LOG}"/' ${LOG4JFILE}
 ```
+### Passwordless entry set up
+copy ssh keys -> passwordless entry
+```
+  cat ~/.ssh/id_rsa.pub | ssh user@123.45.56.78 "cat >> ~/.ssh/authorized_keys"
+  cat ~/.ssh/id_rsa.pub | ssh root@vvlhost01 "cat >> ~/.ssh/authorized_keys"
+```
