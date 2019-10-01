@@ -34,6 +34,11 @@ perl -p -i -e 's/$/ConnectTimeout="5" LoadBalanceWeight="2" MaxConnections="-1">
 perl -p -i -e 's/@([a-zA-Z_])@/ print $1' TE
 perl -p -i -e 's/log4j\.appender\.R\.File.*/log4j.appender.R.File = "$ENV{SCRIPT_LOG}"/' ${LOG4JFILE}
 ```
+### perl to replace with variable substitution
+```
+replaceVal=$(echo "Test_Url":"https://abc.com/v1", | perl -ne '/Test_Url.?(http.*),/ && print "$1\n"')
+perl -p -i -e 's/TEST_URL.*/TEST_URL=$ENV{replaceVal}/g' sample.txt
+```
 ### Passwordless entry set up
 copy ssh keys -> passwordless entry
 ```
