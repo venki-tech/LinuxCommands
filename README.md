@@ -40,8 +40,24 @@ replaceVal=$(echo "Test_Url":"https://abc.com/v1", | perl -ne '/Test_Url.?(http.
 perl -p -i -e 's/TEST_URL.*/TEST_URL=$ENV{replaceVal}/g' sample.txt
 ```
 ### Passwordless entry set up
-copy ssh keys -> passwordless entry
+Enter the following on the host from where you want to connect to a remote host.
+Lets say you want to connect from host A to a remote-host B
+Enter the following on host A, and accept all the default by pressing enter key.
 ```
-  cat ~/.ssh/id_rsa.pub | ssh user@123.45.56.78 "cat >> ~/.ssh/authorized_keys"
-  cat ~/.ssh/id_rsa.pub | ssh root@vvlhost01 "cat >> ~/.ssh/authorized_keys"
+ssh-keygen
+```
+Now copy the file onto the remote-host B, bear in mind you will be prompted for a password for this below command
+```
+ssh-copy-id -i .ssh/id_rsa.pub -p 2022 user@remote-host-B
+```
+
+Or you can copy ssh keys using the following commands, bear in mind you will be prompted for a password for this below command
+```
+  cat ~/.ssh/id_rsa.pub | ssh user@host-B "cat >> ~/.ssh/authorized_keys"
+```
+After the keys are copied to the remote host using one of the above commands, try the ssh again.
+If configured correctly it shouldnt prompt you for a password this time around.
+```
+ssh -p 2022 user@host-B
+ssh user@host-B
 ```
