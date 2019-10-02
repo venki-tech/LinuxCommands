@@ -39,7 +39,7 @@ perl -p -i -e 's/log4j\.appender\.R\.File.*/log4j.appender.R.File = "$ENV{SCRIPT
 replaceVal=$(echo "Test_Url":"https://abc.com/v1", | perl -ne '/Test_Url.?(http.*),/ && print "$1\n"')
 perl -p -i -e 's/TEST_URL.*/TEST_URL=$ENV{replaceVal}/g' sample.txt
 ```
-### Passwordless entry set up
+### Passwordless ssh login into a linux host
 Enter the following on the host from where you want to connect to a remote host.
 Lets say you want to connect from host A to a remote-host B
 Enter the following on host A, and accept all the default by pressing enter key.
