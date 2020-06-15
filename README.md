@@ -38,6 +38,13 @@ perl -p -i -e 's/log4j\.appender\.R\.File.*/log4j.appender.R.File = "$ENV{SCRIPT
 replaceVal=$(echo "Test_Url":"https://abc.com/v1", | perl -ne '/Test_Url.?(http.*),/ && print "$1\n"')
 perl -p -i -e 's/TEST_URL.*/TEST_URL=$ENV{replaceVal}/g' sample.txt
 ```
+### perl to match 2 patterns and store them in 2 shell variables
+```
+read -r var1 var2 <<<  $(perl -n -e '$e = $1, $f = $2 if /Approval To (regex1) - (.*) or/;  END{ print "$e $f" }' sample_file.txt)
+echo $var1 #prints regex1 pattern matches
+echo $var2 #prints regex patterns matchin anything from "- " to "or"
+```
+
 ### Passwordless ssh login into a linux host
 Enter the following on the host from where you want to connect to a remote host.
 Lets say you want to connect from host A to a remote-host B
